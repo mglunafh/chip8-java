@@ -2,13 +2,11 @@ package org.some.chip8;
 
 
 import java.util.Arrays;
+import lombok.SneakyThrows;
 
 public class App
 {
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
-
+    public static void main(String[] args) {
         Chip8VirtualMachine virtualMachine = new Chip8VirtualMachine();
         virtualMachine.clearBuffer();
 
@@ -27,8 +25,19 @@ public class App
 
         ConsoleDisplay consoleDisplay = new ConsoleDisplay(width, height);
 
-        consoleDisplay.display(frameBuffer);
-//        showChars();
+        int t = 3;
+        while (t-- >= 0) {
+            clearScreen();
+            consoleDisplay.display(frameBuffer);
+        }
+    }
+
+    @SneakyThrows
+    private static void clearScreen() {
+        Thread.sleep(500);
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+        Thread.sleep(500);
     }
 
     private static void showChars() {
@@ -43,6 +52,5 @@ public class App
             System.out.println();
             System.out.println("----------------------------------------");
         }
-
     }
 }

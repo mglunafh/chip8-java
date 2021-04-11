@@ -17,13 +17,23 @@ public class ConsoleDisplay {
     }
 
     StringBuilder sb = new StringBuilder();
+    repeat(sb, '-', width + 2).append("\n");
     for (int i = 0; i < height; i++) {
+      sb.append('|');
       for (int j = 0; j < width; j++) {
         char ch = frameBuffer[i * width + j] == 0 ? ' ' : '#';
         sb.append(ch);
       }
-      sb.append("\n");
+      sb.append("|\n");
     }
+    repeat(sb, '-', width + 2);
     System.out.println(sb.toString());
+  }
+
+  private static StringBuilder repeat(StringBuilder sb, char ch, int n) {
+    for (int i = 0; i < n; i++) {
+      sb.append(ch);
+    }
+    return sb;
   }
 }
